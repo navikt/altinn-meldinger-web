@@ -1,15 +1,19 @@
 {
   "name": "altinn-meldinger",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "server/server.js",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
     "http-proxy-middleware": "^1.0.6",
     "openid-client": "^4.4.0",
+    "passport": "^0.4.1",
     "path": "^0.12.7"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server/server.js"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
   }
 }
