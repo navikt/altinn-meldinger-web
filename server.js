@@ -11,7 +11,7 @@ const FRONTEND_API_PATH = BASE_PATH + '/api';
 const BACKEND_API_PATH = '/altinn-meldinger-api';
 const BACKEND_BASEURL = 'http://localhost:8080';
 
-const oauthServer = 'http://localhost:11115'
+const oauthServer = 'http://localhost:9000'
 
 Issuer.discover(oauthServer + '/aad/.well-known/openid-configuration').then(azureIssuer => {
 
