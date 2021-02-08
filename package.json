@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "http-proxy-middleware": "^1.0.6",
     "openid-client": "^4.4.0",
     "passport": "^0.4.1",
