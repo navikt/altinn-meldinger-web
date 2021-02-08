@@ -38,7 +38,7 @@ const strategy = client => {
         }
         const user = {
             'tokenSets': {
-                [authUtils.tokenSetSelfId]: tokenSet
+                self: tokenSet
             },
             'claims': tokenSet.claims()
         };
@@ -90,6 +90,8 @@ const startServer = async () => {
 
     app.use(passport.initialize());
     app.use(passport.session());
+    passport.serializeUser((user, done) => done(null, user));
+    passport.deserializeUser((user, done) => done(null, user));
     passport.use('azureOidc', strategy(azureClient));
     // app.use(proxy);
 
