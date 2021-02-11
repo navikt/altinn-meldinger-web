@@ -1,28 +1,11 @@
-const { BASE_PATH } = require('./konstanter');
+const { BACKEND_API_PATH, BACKEND_BASEURL, FRONTEND_API_PATH } = require('./konstanter');
 const { ensureAuthenticated } = require('./utils');
 const passport = require('passport');
 const express = require('express');
-const expressHttpProxy = require('express-http-proxy');
+const proxy = require('express-http-proxy');
 const { getOnBehalfOfAccessToken } = require('./utils');
 
 const router = express.Router();
-
-
-const FRONTEND_API_PATH = BASE_PATH + '/api';
-const BACKEND_API_PATH = '/altinn-meldinger-api';
-const BACKEND_BASEURL = 'http://localhost:8080';
-
-/*
-*
-const proxy = createProxyMiddleware(FRONTEND_API_PATH, {
-    target: BACKEND_BASEURL,
-    changeOrigin: true,
-    pathRewrite: (path, req) => path.replace(FRONTEND_API_PATH, BACKEND_API_PATH),
-    secure: true,
-    xfwd: true,
-});
-*
-* */
 
 const getConfiguredRouter = (azureClient) => {
     router.get(
@@ -44,9 +27,11 @@ const getConfiguredRouter = (azureClient) => {
 
     router.get('/hello', (req, res) => res.send('hello world'));
 
-    router.use(FRONTEND_API_PATH, expressHttpProxy(
-        BACKEND_API_PATH, {
-            proxyReqPathResolver: (req) => req.originalUrl,
+    router.use(FRONTEND_API_PATH, proxy(
+        `${BACKEND_BASEURL}`, {
+            proxyReqPathResolver: (req) => {
+                return `${BACKEND_API_PATH}${req.url}`;
+            },
             proxyReqOptDecorator: (options, req) => {
                 return new Promise((resolve, reject) =>
                     getOnBehalfOfAccessToken(azureClient, req).then(

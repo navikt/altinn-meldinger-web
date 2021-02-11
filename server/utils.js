@@ -41,7 +41,7 @@ const getOnBehalfOfAccessToken = (authClient, req) => {
                     grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
                     client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
                     requested_token_use: 'on_behalf_of',
-                    scope: "api://BACKEND_ID/.default BACKEND_ID/.default",
+                    scope: "audience", // Må endres til scopes definerte i api
                     assertion: req.user.tokenSets['self'].access_token,
                 })
                 .then((tokenSet) => {
