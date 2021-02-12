@@ -14,16 +14,6 @@ const getConfiguredAzureClient = async () => {
     const azureIssuer = await Issuer.discover(
         oauthServer + '/aad/.well-known/openid-configuration'
     );
-    // return new azureIssuer.Client({
-    //     client_id: 'audience',
-    //     client_secret:
-    //         'TQV5U29k1gHibH5bx1layBo0OSAvAbRT3UYW3EWrSYBB5swxjVfWUa1BS8lqzxG/0v9wruMcrGadany3',
-    //     redirect_uris: ['http://localhost:3000/oauth2/callback'],
-    //     response_types: ['code'],
-    //     id_token_signed_response_alg: 'RS256',
-    //     token_endpoint_auth_method: 'client_secret_basic',
-    // });
-
 
     const issuer = await Issuer.discover(oauthServer + '/aad/.well-known/openid-configuration');
     console.log(`Discovered issuer ${issuer.issuer}`);
@@ -35,6 +25,7 @@ const getConfiguredAzureClient = async () => {
             token_endpoint_auth_signing_alg: 'RS256',
         },
         {
+            // Disse skal komme fra secrets
             keys: [
                 {
                     "p": "36qWbr6zTCe4xM3OLpT_x9mcSbNvnx9Sr-z9GHHS4aCQS7JWirw3ez-8vWM71jypLIbUUj7ym_Dbd98IJtc9S6o8j5QejC92Y5EJqtnmKEkKnD4HWLPruCIf8mPlWFPsQQxHeAB6vv1ki036cfaHnmlV7_Fsv2ftYKHfp86-ozE",
@@ -94,10 +85,6 @@ const sessionOptions = {
     saveUninitialized: false,
     unset: 'destroy',
 };
-// if (process.env.NODE_ENV !== 'development') {
-//     options.cookie.secure = true;
-//     options.store = setupRedis();
-// }
 
 const startServer = async () => {
     app.use(session(sessionOptions));
