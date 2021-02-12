@@ -1,0 +1,27 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: altinn-meldinger
+  namespace: arbeidsgiver
+  labels:
+    team: arbeidsgiver
+spec:
+  image: {{ version }}
+  team: arbeidsgiver
+  port: 3000
+  ingresses:
+    - https://arbeidsgiver.dev.intern.nav.no/altinn-meldinger
+  liveness:
+    path: /altinn-meldinger/internal/healthcheck
+    initialDelay: 20
+  readiness:
+    path: /altinn-meldinger/internal/healthcheck
+    initialDelay: 20
+  accessPolicy:
+    outbound:
+      external:
+        - host: login.microsoftonline.com
+  azure:
+    application:
+      enabled: true
+      tenant: trygdeetaten.no

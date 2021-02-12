@@ -3,7 +3,7 @@ name: Build and deploy master
 on: [push]
 
 env:
-    IMAGE: docker.pkg.github.com/${{ github.repository }}/samtalestotte-arbeidsgiver:${{ github.sha }}
+    IMAGE: docker.pkg.github.com/${{ github.repository }}/altinn-meldinger:${{ github.sha }}
 
 jobs:
     compile-test-and-build:
@@ -25,7 +25,7 @@ jobs:
 
     deploy-to-dev-gcp:
         name: Deploy to dev-gcp
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/skriv-ut-knapp'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/github-actions'
         needs: compile-test-and-build
         runs-on: ubuntu-latest
         steps:
@@ -36,32 +36,4 @@ jobs:
                   CLUSTER: dev-gcp
                   VAR: version=${{ env.IMAGE }}
                   RESOURCE: nais/dev-gcp.yaml
-                  PRINT_PAYLOAD: true
-    deploy-to-labs-gcp:
-        name: Deploy to labs-gcp
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/fiks-breadcrumbs'
-        needs: compile-test-and-build
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v1
-            - uses: nais/deploy/actions/deploy@v1
-              env:
-                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-                  CLUSTER: labs-gcp
-                  VAR: version=${{ env.IMAGE }}
-                  RESOURCE: nais/labs-gcp.yaml
-                  PRINT_PAYLOAD: true
-    deploy-to-prod-gcp:
-        name: Deploy to prod-gcp
-        if: github.ref == 'refs/heads/master'
-        needs: compile-test-and-build
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v1
-            - uses: nais/deploy/actions/deploy@v1
-              env:
-                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-                  CLUSTER: prod-gcp
-                  VAR: version=${{ env.IMAGE }}
-                  RESOURCE: nais/prod-gcp.yaml
                   PRINT_PAYLOAD: true
