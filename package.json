@@ -4,7 +4,6 @@
   "main": "server/server.js",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-http-proxy": "^1.6.2",
     "express-session": "^1.17.1",
