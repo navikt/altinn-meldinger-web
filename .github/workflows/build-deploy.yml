@@ -3,7 +3,7 @@ name: Build and deploy master
 on: [push]
 
 env:
-    IMAGE: docker.pkg.github.com/${{ github.repository }}/altinn-meldinger:${{ github.sha }}
+    IMAGE: docker.pkg.github.com/${{ github.repository }}/altinn-meldinger-web:${{ github.sha }}
 
 jobs:
     compile-test-and-build:
