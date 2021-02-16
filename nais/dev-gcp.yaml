@@ -32,6 +32,9 @@ spec:
     - name: "{{@key}}"
       value: "{{this}}"
     {{/each}}
-    OAUTH2_REDIRECT_URI: https://arbeidsgiver.dev.intern.nav.no/altinn-meldinger-web/oauth2/callback
-    BACKEND_BASEURL: https://arbeidsgiver.dev.intern.nav.no/
-    BACKEND_API_PATH: altinn-meldinger-api
+    - name: OAUTH2_REDIRECT_URI
+      value: https://arbeidsgiver.dev.intern.nav.no/altinn-meldinger-web/oauth2/callback
+    - name: BACKEND_BASEURL
+      value: https://arbeidsgiver.dev.intern.nav.no/
+    - name: BACKEND_API_PATH
+      value: altinn-meldinger-api
