@@ -1,6 +1,9 @@
 const { TokenSet } = require('openid-client');
 const session = require('express-session');
 const BACKEND_CLIENT_ID = 'BACKEND_CLIENT_ID';
+const {
+    OAUTH2_ON_BEHALF_SCOPE,
+} = require('./konstanter');
 
 const getTokenSetsFromSession = (req) => {
     if (req && req.user) {
@@ -41,7 +44,7 @@ const getOnBehalfOfAccessToken = (authClient, req) => {
                     grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
                     client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
                     requested_token_use: 'on_behalf_of',
-                    scope: "audience", // Må endres til scopes og audience definerte i api
+                    scope: OAUTH2_ON_BEHALF_SCOPE,
                     assertion: req.user.tokenSets['self'].access_token,
                 })
                 .then((tokenSet) => {
