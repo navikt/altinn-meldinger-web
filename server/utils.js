@@ -2,6 +2,7 @@ const { TokenSet } = require('openid-client');
 const session = require('express-session');
 const BACKEND_CLIENT_ID = 'BACKEND_CLIENT_ID';
 const {
+    FRONTEND_BASE_URL,
     OAUTH2_ON_BEHALF_SCOPE,
 } = require('./konstanter');
 
@@ -29,7 +30,7 @@ const ensureAuthenticated = async (req, res, next) => {
         next();
     } else {
         session.redirectTo = req.originalUrl;
-        res.redirect('/login');
+        res.redirect(`${FRONTEND_BASE_URL}/login`);
     }
 };
 

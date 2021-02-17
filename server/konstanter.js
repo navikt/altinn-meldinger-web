@@ -1,7 +1,8 @@
 const ALTINN_MELDINGER_WEB_SESSION_NAME = process.env.ALTINN_MELDINGER_WEB_SESSION_NAME || 'altinn-meldinger-web-session-name';
 const ALTINN_MELDINGER_WEB_SESSION_SECRET = process.env.ALTINN_MELDINGER_WEB_SESSION_SECRET || 'testSessionSecret';
 
-const FRONTEND_API_PATH = process.env.FRONTEND_API_PATH || '/altinn-meldinger-web/api';
+const FRONTEND_BASE_URL = '/altinn-meldinger-web';
+const FRONTEND_API_PATH = FRONTEND_BASE_URL + '/altinn-meldinger-web/api';
 const BACKEND_API_PATH = process.env.BACKEND_API_PATH || '/altinn-meldinger-api';
 const BACKEND_BASEURL = process.env.BACKEND_BASEURL || 'http://localhost:8080';
 
@@ -30,7 +31,7 @@ const testJwks = JSON.stringify(
 const AZURE_APP_JWKS = JSON.parse(process.env.AZURE_APP_JWKS || testJwks);
 const AZURE_APP_WELL_KNOWN_URL = process.env.AZURE_APP_WELL_KNOWN_URL || 'http://localhost:9000/aad/.well-known/openid-configuration';
 const OAUTH2_ON_BEHALF_SCOPE = process.env.OAUTH2_ON_BEHALF_SCOPE || 'api://altinn-meldinger-api.localhost/.write';
-const OAUTH2_REDIRECT_URI = process.env.OAUTH2_REDIRECT_URI || 'http://localhost:3000/oauth2/callback';
+const OAUTH2_REDIRECT_URI = process.env.OAUTH2_REDIRECT_URI || 'http://localhost:3000/altinn-meldinger-web/oauth2/callback';
 
 
 module.exports = {
@@ -39,6 +40,7 @@ module.exports = {
     BACKEND_BASEURL,
     BACKEND_API_PATH,
     FRONTEND_API_PATH,
+    FRONTEND_BASE_URL,
     AZURE_APP_CLIENT_ID,
     AZURE_APP_JWKS,
     AZURE_APP_WELL_KNOWN_URL,
