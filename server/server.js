@@ -70,21 +70,27 @@ const sessionOptions = {
 };
 
 const startServer = async () => {
-    app.use(session(sessionOptions));
-    const azureClient = await getConfiguredAzureClient();
-    const router = getConfiguredRouter(azureClient);
+    console.log('Starter server ...');
 
-    app.use(passport.initialize());
-    app.use(passport.session());
-    passport.serializeUser((user, done) => done(null, user));
-    passport.deserializeUser((user, done) => done(null, user));
-    passport.use('azureOidc', strategy(azureClient));
+    try {
+        app.use(session(sessionOptions));
+        const azureClient = await getConfiguredAzureClient();
+        const router = getConfiguredRouter(azureClient);
 
-    app.use('/', router);
+        app.use(passport.initialize());
+        app.use(passport.session());
+        passport.serializeUser((user, done) => done(null, user));
+        passport.deserializeUser((user, done) => done(null, user));
+        passport.use('azureOidc', strategy(azureClient));
 
-    app.listen(PORT, () => {
-        console.log('Server listening on port', PORT);
-    });
+        app.use('/altinn-meldinger-web', router);
+
+        app.listen(PORT, () => {
+            console.log('Server listening on port', PORT);
+        });
+    } catch (e) {
+        console.log(e);
+    }
 };
 
 startServer();

@@ -1,4 +1,4 @@
-const { BACKEND_API_PATH, BACKEND_BASEURL, FRONTEND_API_PATH } = require('./konstanter');
+const { BACKEND_API_PATH, BACKEND_BASEURL, FRONTEND_API_PATH, FRONTEND_BASE_URL } = require('./konstanter');
 const { ensureAuthenticated } = require('./utils');
 const passport = require('passport');
 const express = require('express');
@@ -8,20 +8,23 @@ const { getOnBehalfOfAccessToken } = require('./utils');
 const router = express.Router();
 
 const getConfiguredRouter = (azureClient) => {
+
     router.get(
         '/login',
         passport.authenticate('azureOidc', {
-            successRedirect: '/success',
-            failureRedirect: '/login',
+            successRedirect: `${FRONTEND_BASE_URL}/success`,
+            failureRedirect: `${FRONTEND_BASE_URL}/login`,
         })
     );
     router.use(
         '/oauth2/callback',
-        passport.authenticate('azureOidc', { failureRedirect: '/login' }),
+        passport.authenticate('azureOidc', { failureRedirect: `${FRONTEND_BASE_URL}/login` }),
         (req, res) => {
             res.redirect('/');
         }
     );
+
+    router.get('/internal/healthcheck', (req, res) => res.send('alive'));
 
     router.use(ensureAuthenticated);
 
