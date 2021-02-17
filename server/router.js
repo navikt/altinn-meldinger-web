@@ -23,6 +23,8 @@ const getConfiguredRouter = (azureClient) => {
         }
     );
 
+    router.use('/internal/healthcheck', (req, res) => res.send('alive'));
+
     router.use(ensureAuthenticated);
 
     router.get('/hello', (req, res) => res.send('hello world'));
