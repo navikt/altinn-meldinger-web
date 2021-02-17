@@ -6,7 +6,7 @@ const BACKEND_API_PATH = process.env.BACKEND_API_PATH || '/altinn-meldinger-api'
 const BACKEND_BASEURL = process.env.BACKEND_BASEURL || 'http://localhost:8080';
 
 const AZURE_APP_CLIENT_ID = process.env.AZURE_APP_CLIENT_ID || 'audience';
-const AZURE_APP_JWKS = process.env.AZURE_APP_JWKS ||
+const testJwks = JSON.stringify(
     {
         keys: [
             {
@@ -24,7 +24,10 @@ const AZURE_APP_JWKS = process.env.AZURE_APP_JWKS ||
                 "n": "vJRalsEoApXYdEFsrYo7QOcM36shQXTQvyXuiJPzqq-WpwOM7dCLUQJ7HRO07kKJAfdldwV7j1k1KELjwUozXQC_uGL28xByaP3BZ5JcTmBWz_X2tIRkxOcj8QYJYUaRBWF8gjISkbZC_Cli94NI5qkdSegGV4tjHYwGhk3qX1Pp0NULhxmfdiiMtkMj2PEGQGxl87tgUQrWjBZj1pcn-d7Tnw8uUNMt5tfqCzVXQcJefkuPTOetvFMSyMk8ismd1uxLie1sQ4I-KFnD9OMLVAHfuXNtLrQoPaYJVzqE7ix3f9y5kS8VMn8-UN42gxm6AMenJ0TXJFaAUnGAogoC9w"
             }
         ]
-    };
+    }
+);
+
+const AZURE_APP_JWKS = JSON.parse(process.env.AZURE_APP_JWKS || testJwks);
 const AZURE_APP_WELL_KNOWN_URL = process.env.AZURE_APP_WELL_KNOWN_URL || 'http://localhost:9000/aad/.well-known/openid-configuration';
 const OAUTH2_ON_BEHALF_SCOPE = process.env.OAUTH2_ON_BEHALF_SCOPE || 'api://altinn-meldinger-api.localhost/.write';
 const OAUTH2_REDIRECT_URI = process.env.OAUTH2_REDIRECT_URI || 'http://localhost:3000/oauth2/callback';
