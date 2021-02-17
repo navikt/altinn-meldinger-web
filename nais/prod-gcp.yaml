@@ -10,7 +10,7 @@ spec:
   team: arbeidsgiver
   port: 3000
   ingresses:
-    - https://arbeidsgiver.dev.intern.nav.no/altinn-meldinger-web
+    - https://arbeidsgiver.intern.nav.no/altinn-meldinger-web
   liveness:
     path: /altinn-meldinger-web/internal/healthcheck
     initialDelay: 20
@@ -29,7 +29,7 @@ spec:
   azure:
     application:
       enabled: true
-      tenant: trygdeetaten.no
+      tenant: nav.no
       claims:
         groups:
           - id: 45ddeb07-f047-4dc0-bf49-4b1c0a60b8ed
@@ -39,10 +39,10 @@ spec:
       value: "{{this}}"
     {{/each}}
     - name: OAUTH2_REDIRECT_URI
-      value: https://arbeidsgiver.dev.intern.nav.no/altinn-meldinger-web/oauth2/callback
+      value: https://arbeidsgiver.intern.nav.no/altinn-meldinger-web/oauth2/callback
     - name: BACKEND_BASEURL
-      value: https://arbeidsgiver.dev.intern.nav.no/
+      value: https://arbeidsgiver.intern.nav.no/
     - name: BACKEND_API_PATH
       value: /altinn-meldinger-api
     - name: OAUTH2_ON_BEHALF_SCOPE
-      value: api://dev-gcp.arbeidsgiver.altinn-meldinger-api/.default
+      value: api://prod-gcp.arbeidsgiver.altinn-meldinger-api/.default

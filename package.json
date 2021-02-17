@@ -12,7 +12,7 @@
     "path": "^0.12.7"
   },
   "scripts": {
-    "start": "DEBUG=express-http-proxy node server/server.js"
+    "start": "node server/server.js"
   },
   "devDependencies": {
     "prettier": "^2.2.1"

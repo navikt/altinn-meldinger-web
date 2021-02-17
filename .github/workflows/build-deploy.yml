@@ -25,7 +25,7 @@ jobs:
 
     deploy-to-dev-gcp:
         name: Deploy to dev-gcp
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/github-actions'
+        if: github.ref == 'refs/heads/main''
         needs: compile-test-and-build
         runs-on: ubuntu-latest
         steps:
@@ -36,4 +36,19 @@ jobs:
                   CLUSTER: dev-gcp
                   VAR: version=${{ env.IMAGE }}
                   RESOURCE: nais/dev-gcp.yaml
+                  PRINT_PAYLOAD: true
+
+    deploy-to-dev-gcp:
+        name: Deploy to prod-gcp
+        if: github.ref == 'refs/heads/main''
+        needs: compile-test-and-build
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - uses: nais/deploy/actions/deploy@v1
+              env:
+                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+                  CLUSTER: prod-gcp
+                  VAR: version=${{ env.IMAGE }}
+                  RESOURCE: nais/prod-gcp.yaml
                   PRINT_PAYLOAD: true
