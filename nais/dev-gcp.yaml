@@ -43,4 +43,4 @@ spec:
     - name: BACKEND_BASEURL
       value: https://arbeidsgiver.dev.intern.nav.no/
     - name: BACKEND_API_PATH
-      value: altinn-meldinger-api
+      value: /altinn-meldinger-api
