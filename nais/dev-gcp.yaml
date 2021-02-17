@@ -30,6 +30,9 @@ spec:
     application:
       enabled: true
       tenant: trygdeetaten.no
+      claims:
+        groups:
+          - id: 45ddeb07-f047-4dc0-bf49-4b1c0a60b8ed
   env:
     {{#each env}}
     - name: "{{@key}}"
