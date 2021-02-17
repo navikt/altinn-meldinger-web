@@ -38,7 +38,7 @@ jobs:
                   RESOURCE: nais/dev-gcp.yaml
                   PRINT_PAYLOAD: true
 
-    deploy-to-dev-gcp:
+    deploy-to-prod-gcp:
         name: Deploy to prod-gcp
         if: github.ref == 'refs/heads/main''
         needs: compile-test-and-build
