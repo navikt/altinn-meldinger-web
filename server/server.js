@@ -71,7 +71,6 @@ const sessionOptions = {
 
 const startServer = async () => {
     console.log('Starter server ...');
-    app.get('/internal/healthcheck', (req, res) => res.sendStatus(200));
 
     try {
         app.use(session(sessionOptions));
@@ -84,12 +83,14 @@ const startServer = async () => {
         passport.deserializeUser((user, done) => done(null, user));
         passport.use('azureOidc', strategy(azureClient));
 
-        app.use('/', router);
-    } catch (ignored) {}
+        app.use('/altinn-meldinger-web', router);
 
-    app.listen(PORT, () => {
-        console.log('Server listening on port', PORT);
-    });
+        app.listen(PORT, () => {
+            console.log('Server listening on port', PORT);
+        });
+    } catch (e) {
+        console.log(e);
+    }
 };
 
 startServer();

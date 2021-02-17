@@ -8,6 +8,7 @@ const { getOnBehalfOfAccessToken } = require('./utils');
 const router = express.Router();
 
 const getConfiguredRouter = (azureClient) => {
+
     router.get(
         '/login',
         passport.authenticate('azureOidc', {
@@ -23,7 +24,7 @@ const getConfiguredRouter = (azureClient) => {
         }
     );
 
-    router.use('/internal/healthcheck', (req, res) => res.send('alive'));
+    router.get('/internal/healthcheck', (req, res) => res.send('alive'));
 
     router.use(ensureAuthenticated);
 
