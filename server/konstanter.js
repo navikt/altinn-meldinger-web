@@ -2,7 +2,7 @@ const ALTINN_MELDINGER_WEB_SESSION_NAME = process.env.ALTINN_MELDINGER_WEB_SESSI
 const ALTINN_MELDINGER_WEB_SESSION_SECRET = process.env.ALTINN_MELDINGER_WEB_SESSION_SECRET || 'testSessionSecret';
 
 const FRONTEND_BASE_URL = '/altinn-meldinger-web';
-const FRONTEND_API_PATH = FRONTEND_BASE_URL + '/altinn-meldinger-web/api';
+const FRONTEND_API_PATH = '/api';
 const BACKEND_API_PATH = process.env.BACKEND_API_PATH || '/altinn-meldinger-api';
 const BACKEND_BASEURL = process.env.BACKEND_BASEURL || 'http://localhost:8080';
 
