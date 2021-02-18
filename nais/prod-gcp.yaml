@@ -43,7 +43,7 @@ spec:
     - name: OAUTH2_REDIRECT_URI
       value: https://arbeidsgiver.intern.nav.no/altinn-meldinger-web/oauth2/callback
     - name: BACKEND_BASEURL
-      value: https://arbeidsgiver.intern.nav.no/
+      value: https://arbeidsgiver.intern.nav.no
     - name: BACKEND_API_PATH
       value: /altinn-meldinger-api
     - name: OAUTH2_ON_BEHALF_SCOPE
