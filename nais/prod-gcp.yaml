@@ -32,7 +32,7 @@ spec:
       tenant: nav.no
       claims:
         groups:
-          - id: 45ddeb07-f047-4dc0-bf49-4b1c0a60b8ed
+          - id: 53e6bb70-00e3-498a-9a69-1466e9a22d39
   envFrom:
     - secret: altinn-meldinger-web-session-secret
   env:
