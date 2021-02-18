@@ -68,6 +68,9 @@ const sessionOptions = {
     saveUninitialized: false,
     unset: 'destroy',
 };
+if (process.env.NODE_ENV !== 'development') {
+    sessionOptions.cookie.secure = true;
+}
 
 const startServer = async () => {
     console.log('Starter server ...');

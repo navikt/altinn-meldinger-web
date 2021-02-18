@@ -33,6 +33,8 @@ spec:
       claims:
         groups:
           - id: 45ddeb07-f047-4dc0-bf49-4b1c0a60b8ed
+  envFrom:
+    - secret: altinn-meldinger-web-session-secret
   env:
     {{#each env}}
     - name: "{{@key}}"

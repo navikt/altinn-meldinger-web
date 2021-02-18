@@ -30,7 +30,7 @@ const testJwks = JSON.stringify(
 
 const AZURE_APP_JWKS = JSON.parse(process.env.AZURE_APP_JWKS || testJwks);
 const AZURE_APP_WELL_KNOWN_URL = process.env.AZURE_APP_WELL_KNOWN_URL || 'http://localhost:9000/aad/.well-known/openid-configuration';
-const OAUTH2_ON_BEHALF_SCOPE = process.env.OAUTH2_ON_BEHALF_SCOPE || 'api://altinn-meldinger-api.localhost/.write';
+const OAUTH2_ON_BEHALF_SCOPE = process.env.OAUTH2_ON_BEHALF_SCOPE || 'api://altinn-meldinger-api.localhost/.default';
 const OAUTH2_REDIRECT_URI = process.env.OAUTH2_REDIRECT_URI || 'http://localhost:3000/altinn-meldinger-web/oauth2/callback';
 
 
