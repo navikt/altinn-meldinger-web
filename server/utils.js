@@ -40,7 +40,6 @@ const getOnBehalfOfAccessToken = (authClient, req) => {
             const tokenSets = getTokenSetsFromSession(req);
             resolve(tokenSets[BACKEND_CLIENT_ID].access_token);
         } else {
-            console.log("Creating a on_behalf_of request with assetion", req.user.tokenSets['self']);
             authClient
                 .grant({
                     grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
@@ -55,7 +54,6 @@ const getOnBehalfOfAccessToken = (authClient, req) => {
                     resolve(tokenSet.access_token);
                 })
                 .catch((err) => {
-                    console.error('kunne ikke grante token');
                     console.error(err);
                     reject(err);
                 });
