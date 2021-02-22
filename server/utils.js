@@ -40,24 +40,24 @@ const getOnBehalfOfAccessToken = (authClient, req) => {
             const tokenSets = getTokenSetsFromSession(req);
             resolve(tokenSets[BACKEND_CLIENT_ID].access_token);
         } else {
-            resolve(req.user.tokenSets['self'].id_token);
-            // authClient
-            //     .grant({
-            //         grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
-            //         client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
-            //         requested_token_use: 'on_behalf_of',
-            //         scope: OAUTH2_ON_BEHALF_SCOPE,
-            //         assertion: req.user.tokenSets['self'].access_token,
-            //     })
-            //     .then((tokenSet) => {
-            //         req.user.tokenSets[BACKEND_CLIENT_ID] = tokenSet;
-            //         resolve(tokenSet.access_token);
-            //     })
-            //     .catch((err) => {
-            //         console.error('kunne ikke grante token');
-            //         console.error(err);
-            //         reject(err);
-            //     });
+            authClient
+                .grant({
+                    grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+                    client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
+                    requested_token_use: 'on_behalf_of',
+                    scope: OAUTH2_ON_BEHALF_SCOPE,
+                    assertion: req.user.tokenSets['self'].access_token,
+                })
+                .then((tokenSet) => {
+                    req.user.tokenSets[BACKEND_CLIENT_ID] = tokenSet;
+                    console.log("got new onbehalfof token", tokenSet);
+                    resolve(tokenSet.access_token);
+                })
+                .catch((err) => {
+                    console.error('kunne ikke grante token');
+                    console.error(err);
+                    reject(err);
+                });
         }
     });
 };
