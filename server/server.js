@@ -47,7 +47,7 @@ const strategy = (client) => {
         params: {
             response_types: ['code'],
             response_mode: 'query',
-            scope: 'openid',
+            scope: `openid ${AZURE_APP_CLIENT_ID}/.default`
         },
         passReqToCallback: false,
         usePKCE: 'S256',
