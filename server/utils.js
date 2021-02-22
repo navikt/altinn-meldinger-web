@@ -50,7 +50,6 @@ const getOnBehalfOfAccessToken = (authClient, req) => {
                 })
                 .then((tokenSet) => {
                     req.user.tokenSets[BACKEND_CLIENT_ID] = tokenSet;
-                    console.log("got new onbehalfof token", tokenSet);
                     resolve(tokenSet.access_token);
                 })
                 .catch((err) => {
