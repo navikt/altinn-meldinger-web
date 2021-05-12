@@ -29,7 +29,7 @@ jobs:
         ### DEVELOPERS: Insert your feature branch name below (in addition to main) if you want to deploy it to dev
         ### e.g. github.ref == 'refs/heads/main' || github.ref == 'refs/heads/test-branch'
         #########################
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/bytt-namespace'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/bytt-namepsace'
         needs: compile-test-and-build
         runs-on: ubuntu-latest
         steps:
