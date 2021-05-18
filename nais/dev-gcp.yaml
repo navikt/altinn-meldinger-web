@@ -26,6 +26,7 @@ spec:
         - host: login.microsoftonline.com
       rules:
         - application: altinn-meldinger-api
+          namespace: arbeidsgiver
   azure:
     application:
       enabled: true
