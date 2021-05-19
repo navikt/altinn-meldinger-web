@@ -25,14 +25,18 @@ jobs:
 
     deploy-to-dev-gcp:
         name: Deploy to dev-gcp
-        if: github.ref == 'refs/heads/main'
+        #########################
+        ### DEVELOPERS: Insert your feature branch name below (in addition to main) if you want to deploy it to dev
+        ### e.g. github.ref == 'refs/heads/main' || github.ref == 'refs/heads/test-branch'
+        #########################
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/bytt-namepsace'
         needs: compile-test-and-build
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v1
             - uses: nais/deploy/actions/deploy@v1
               env:
-                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY_PERMITTERING_OG_NEDBEMANNING }}
                   CLUSTER: dev-gcp
                   VAR: version=${{ env.IMAGE }}
                   RESOURCE: nais/dev-gcp.yaml
@@ -47,7 +51,7 @@ jobs:
             - uses: actions/checkout@v1
             - uses: nais/deploy/actions/deploy@v1
               env:
-                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY_PERMITTERING_OG_NEDBEMANNING }}
                   CLUSTER: prod-gcp
                   VAR: version=${{ env.IMAGE }}
                   RESOURCE: nais/prod-gcp.yaml

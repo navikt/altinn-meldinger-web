@@ -2,12 +2,12 @@ apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
   name: altinn-meldinger-web
-  namespace: arbeidsgiver
+  namespace: permittering-og-nedbemanning
   labels:
-    team: arbeidsgiver
+    team: permittering-og-nedbemanning
 spec:
   image: {{ version }}
-  team: arbeidsgiver
+  team: permittering-og-nedbemanning
   port: 3000
   ingresses:
     - https://arbeidsgiver.intern.nav.no/altinn-meldinger-web
@@ -26,6 +26,7 @@ spec:
         - host: login.microsoftonline.com
       rules:
         - application: altinn-meldinger-api
+          namespace: arbeidsgiver
   azure:
     application:
       enabled: true
@@ -36,10 +37,6 @@ spec:
   envFrom:
     - secret: altinn-meldinger-web-session-secret
   env:
-    {{#each env}}
-    - name: "{{@key}}"
-      value: "{{this}}"
-    {{/each}}
     - name: OAUTH2_REDIRECT_URI
       value: https://arbeidsgiver.intern.nav.no/altinn-meldinger-web/oauth2/callback
     - name: BACKEND_BASEURL
