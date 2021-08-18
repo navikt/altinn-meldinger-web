@@ -28,8 +28,6 @@ const getConfiguredRouter = (azureClient) => {
 
     router.use(ensureAuthenticated);
 
-    router.get('/hello', (req, res) => res.send('hello world'));
-
     router.use(FRONTEND_API_PATH, proxy(
         `${BACKEND_BASEURL}`, {
             proxyReqPathResolver: (req) => {

@@ -26,7 +26,7 @@ spec:
         - host: login.microsoftonline.com
       rules:
         - application: altinn-meldinger-api
-          namespace: arbeidsgiver
+          namespace: permittering-og-nedbemanning
   azure:
     application:
       enabled: true
@@ -40,8 +40,8 @@ spec:
     - name: OAUTH2_REDIRECT_URI
       value: https://arbeidsgiver.dev.intern.nav.no/altinn-meldinger-web/oauth2/callback
     - name: BACKEND_BASEURL
-      value: http://altinn-meldinger-api.arbeidsgiver.svc.cluster.local
+      value: http://altinn-meldinger-api.permittering-og-nedbemanning.svc.cluster.local
     - name: BACKEND_API_PATH
       value: /altinn-meldinger-api
     - name: OAUTH2_ON_BEHALF_SCOPE
-      value: api://dev-gcp.arbeidsgiver.altinn-meldinger-api/.default
+      value: api://dev-gcp.permittering-og-nedbemanning.altinn-meldinger-api/.default

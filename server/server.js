@@ -23,7 +23,7 @@ const getConfiguredAzureClient = async () => {
             client_id: AZURE_APP_CLIENT_ID,
             redirect_uris: [OAUTH2_REDIRECT_URI],
             token_endpoint_auth_method: 'private_key_jwt',
-            token_endpoint_auth_signing_alg: 'RS256',
+            token_endpoint_auth_signing_alg: 'RS256'
         },
         AZURE_APP_JWKS
     );
