@@ -10,7 +10,7 @@ spec:
   team: permittering-og-nedbemanning
   port: 3000
   ingresses:
-    - https://arbeidsgiver.dev.intern.nav.no/altinn-meldinger-web
+    - https://altinn-meldinger-web.dev.intern.nav.no/altinn-meldinger-web
   liveness:
     path: /altinn-meldinger-web/internal/healthcheck
     initialDelay: 20
@@ -38,7 +38,7 @@ spec:
     - secret: altinn-meldinger-web-session-secret
   env:
     - name: OAUTH2_REDIRECT_URI
-      value: https://arbeidsgiver.dev.intern.nav.no/altinn-meldinger-web/oauth2/callback
+      value: https://altinn-meldinger-web.dev.intern.nav.no/altinn-meldinger-web/oauth2/callback
     - name: BACKEND_BASEURL
       value: http://altinn-meldinger-api.permittering-og-nedbemanning.svc.cluster.local
     - name: BACKEND_API_PATH
