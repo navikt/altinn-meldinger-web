@@ -7,7 +7,7 @@ const { getOnBehalfOfAccessToken } = require('./utils');
 
 const router = express.Router();
 
-const getConfiguredRouter = (azureClient) => {
+const getConfiguredRouter = (azureClient, azureIssuer) => {
 
     router.get(
         '/login',
@@ -17,11 +17,14 @@ const getConfiguredRouter = (azureClient) => {
         })
     );
     router.use(
-        '/oauth2/callback',
-        passport.authenticate('azureOidc', { failureRedirect: `${FRONTEND_BASE_URL}/login` }),
-        (req, res) => {
-            res.redirect('/');
-        }
+        '/oauth2/callback', passport.authenticate('azureOidc', {
+                clientAssertionPayload: {
+                    aud: [azureIssuer]
+                },
+                failureRedirect: `${FRONTEND_BASE_URL}/login`
+            }), (req, res) => {
+                res.redirect('/');
+            }
     );
 
     router.get('/internal/healthcheck', (req, res) => res.send('alive'));

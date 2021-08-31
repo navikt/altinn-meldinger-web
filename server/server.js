@@ -14,9 +14,11 @@ const {
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+let azureIssuer = null;
 
 const getConfiguredAzureClient = async () => {
     const issuer = await Issuer.discover(AZURE_APP_WELL_KNOWN_URL);
+    azureIssuer = issuer.token_endpoint;
     console.log(`Discovered issuer ${issuer.issuer}`);
     return new issuer.Client(
         {
@@ -78,7 +80,7 @@ const startServer = async () => {
     try {
         app.use(session(sessionOptions));
         const azureClient = await getConfiguredAzureClient();
-        const router = getConfiguredRouter(azureClient);
+        const router = getConfiguredRouter(azureClient, azureIssuer);
 
         app.use(passport.initialize());
         app.use(passport.session());
