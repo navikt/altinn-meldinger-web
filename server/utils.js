@@ -51,7 +51,7 @@ const getOnBehalfOfAccessToken = (authClient, azureIssuer, req) => {
                     assertion: req.user.tokenSets['self'].access_token
                 }, {
                     clientAssertionPayload: {
-                        aud: [AZURE_APP_CLIENT_ID]
+                        aud: [azureIssuer]
                     }
                 })
                 .then((tokenSet) => {
