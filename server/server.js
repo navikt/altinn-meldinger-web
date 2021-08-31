@@ -51,6 +51,11 @@ const strategy = (client) => {
             response_mode: 'query',
             scope: `openid ${AZURE_APP_CLIENT_ID}/.default`
         },
+        extras: {
+            clientAssertionPayload: {
+                aud: [azureIssuer]
+            }
+        },
         passReqToCallback: false,
         usePKCE: 'S256',
         sessionKey: ALTINN_MELDINGER_WEB_SESSION_NAME

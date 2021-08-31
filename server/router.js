@@ -18,9 +18,6 @@ const getConfiguredRouter = (azureClient, azureIssuer) => {
     );
     router.use(
         '/oauth2/callback', passport.authenticate('azureOidc', {
-                clientAssertionPayload: {
-                    aud: [azureIssuer]
-                },
                 failureRedirect: `${FRONTEND_BASE_URL}/login`
             }), (req, res) => {
                 res.redirect('/');
