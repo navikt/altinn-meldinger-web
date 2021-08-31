@@ -35,7 +35,7 @@ const getConfiguredRouter = (azureClient, azureIssuer) => {
             },
             proxyReqOptDecorator: (options, req) => {
                 return new Promise((resolve, reject) =>
-                    getOnBehalfOfAccessToken(azureClient, req).then(
+                    getOnBehalfOfAccessToken(azureClient, azureIssuer, req).then(
                         (access_token) => {
                             options.headers.Authorization = `Bearer ${access_token}`;
                             resolve(options);

@@ -34,19 +34,24 @@ const ensureAuthenticated = async (req, res, next) => {
     }
 };
 
-const getOnBehalfOfAccessToken = (authClient, req) => {
+const getOnBehalfOfAccessToken = (authClient, azureIssuer, req) => {
     return new Promise((resolve, reject) => {
         if (hasValidAccessToken(req, BACKEND_CLIENT_ID)) {
             const tokenSets = getTokenSetsFromSession(req);
             resolve(tokenSets[BACKEND_CLIENT_ID].access_token);
         } else {
+            console.log("Henter ny on-behalf-of token");
             authClient
                 .grant({
                     grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
                     client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
                     requested_token_use: 'on_behalf_of',
                     scope: OAUTH2_ON_BEHALF_SCOPE,
-                    assertion: req.user.tokenSets['self'].access_token,
+                    assertion: req.user.tokenSets['self'].access_token
+                }, {
+                    clientAssertionPayload: {
+                        aud: [azureIssuer]
+                    }
                 })
                 .then((tokenSet) => {
                     req.user.tokenSets[BACKEND_CLIENT_ID] = tokenSet;
