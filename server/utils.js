@@ -4,6 +4,7 @@ const BACKEND_CLIENT_ID = 'BACKEND_CLIENT_ID';
 const {
     FRONTEND_BASE_URL,
     OAUTH2_ON_BEHALF_SCOPE,
+    AZURE_APP_CLIENT_ID
 } = require('./konstanter');
 
 const getTokenSetsFromSession = (req) => {
@@ -50,7 +51,7 @@ const getOnBehalfOfAccessToken = (authClient, azureIssuer, req) => {
                     assertion: req.user.tokenSets['self'].access_token
                 }, {
                     clientAssertionPayload: {
-                        aud: [azureIssuer]
+                        aud: [AZURE_APP_CLIENT_ID]
                     }
                 })
                 .then((tokenSet) => {
